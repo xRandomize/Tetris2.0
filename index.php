@@ -16,5 +16,6 @@
     <p>LEVEL: <span id="level">0</span><p>
 
     <script src="head.js"></script>
+    <script src="Constants.js"></script>
 </body>
 </html>
