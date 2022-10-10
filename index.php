@@ -17,5 +17,6 @@
 
     <script src="Constants.js"></script>
     <script src="head.js"></script>
+    <script src="SpawnPieces.js"></script>
 </body>
 </html>

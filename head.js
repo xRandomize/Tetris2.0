@@ -16,5 +16,11 @@ class GameMap {
         }
         return grid
     }
+
+    collision(cols, row) {
+        return !(
+            (())
+        )
+    }
 }
 
