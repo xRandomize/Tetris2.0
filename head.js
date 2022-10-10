@@ -1,5 +1,20 @@
 //Setting up game map
-const canvas = document.querySelector("canvas");
-const ctx = canvas.getContext("2d");
+class GameMap {
+    constructor(ctx) {
+        this.ctx = ctx
+        this.fallingPiece = null
+        this.grid = this.makeStartGrid()
+    }
 
+    makeStartGrid() {
+        let grid = []
+        for (var i = 0; i < row; i++) {
+            grid.push([])
+            for (var j = 0; j < cols; j++) {
+                grid(grid.length - 1).push(0)
+            }
+        }
+        return grid
+    }
+}
 
