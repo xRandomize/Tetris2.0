@@ -20,7 +20,7 @@ class GameMap {
     collision(x, y) {
         const shape = this.fallingPiece.shape
         const n = shape.length
-        for (let i = 0; i < n, i++) {
+        for (let i = 0; i < n; i++) {
             for ( let j = 0; j < n; j++) {
                 if (shape[i][j] > 0) {
                     let p = x + j
