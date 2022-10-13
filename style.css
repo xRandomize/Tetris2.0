@@ -7,3 +7,7 @@ h1 {
     height: 600px;
     border: 2px solid #000;
 }
+
+.System {
+    display:inline-block
+}

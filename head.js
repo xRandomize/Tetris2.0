@@ -17,6 +17,52 @@ class GameMap {
         return grid
     }
 
+    //Game laws of physics
+    gameState() {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid.length; j++) {
+                let cell = this.grid[i][j]
+                this.ctx.fillStyle = colors[cell]
+                this.ctx.fillRect(j, i, 1, 1)
+            }
+        }
+
+        if (this.fallingPiece !== null) {
+            this.fallingPiece.renderPiece()
+        }
+    }
+
+    gravity() {
+        if (this.fallingPiece === null) {
+            this.gameState()
+            return
+
+        } else if (this.collision(this.fallingPiece.x, this.fallingPiece.y + 1)) {
+            const shape = this.fallingPiece.shape
+            const x = this.fallingPiece.x
+            const y = this.fallingPiece.y
+
+            shape.map((row, i) => {
+                row.map((cell, j) => {
+                    let p = x + j
+                    let q = y + i
+                    if (p >= 0 && p < cols && q > row && cell > 0) {
+                        this.grid[q][p] = shape[i][j]
+                    }
+                })
+            })
+
+            if (this.fallingPiece.y === 0) {
+                alert("Game over")
+                this.grid = this.makeStartGrid()
+            }
+            this.fallingPiece = null
+        } else {
+            this.fallingPiece.y += 1
+        }
+        this.gameState()
+    }
+
     collision(x, y) {
         const shape = this.fallingPiece.shape
         const n = shape.length
@@ -37,5 +83,6 @@ class GameMap {
         }
         return false;
     }
+
 }
 

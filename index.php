@@ -9,14 +9,17 @@
     <title>Tetris</title>
 </head>
 <body>
-    <canvas id="canvas" width="400" height="800"></canvas>
-
-    <h1>TETRIS<h1>
-    <p>SCORE: <span id="score">0</span><p>
-    <p>LEVEL: <span id="level">0</span><p>
+    <canvas id="canvas"></canvas>
+    
+    <div class="System">
+        <h1>TETRIS<h1>
+        <p>SCORE:<span id="score">0</span><p>
+        <p>LEVEL:<span id="level">0</span><p>
+    </div>
 
     <script src="Constants.js"></script>
-    <script src="head.js"></script>
     <script src="SpawnPieces.js"></script>
+    <script src="head.js"></script>
+    <script src="gameStart"></script>
 </body>
 </html>
