@@ -1,18 +1,27 @@
-let canvas = document.getElementById("game-canvas")
+let canvas = document.getElementById("canvas")
 let scoreboard = document.getElementById("score")
 let ctx = canvas.getContext("2d")
 
 ctx.scale(block_size, block_size)
-let model = new gameModel(ctx)
+let model = new GameModel(ctx)
 
 let score = 0
 
 setInterval(() => {
     newGameState()
-}, gameClock)
+}, gameClock);
 
 let newGameState = () => {
     fullSend()
+    
+    if(model.fallingPiece === null) {
+        const rand = Math.round(Math.random() * 6) + 1
+        const newPiece = new Piece(shapes[rand], ctx)
+        model.fallingPiece = newPiece
+        model.moveDown()
+    } else {
+        model.moveDown()
+    }
 }
 
 const fullSend = () => {
@@ -29,6 +38,28 @@ const fullSend = () => {
         if (aliFilled(model.grid[i])) {
             score += score_worth
             model.grid.splice(i, l)
+            model.grid.unshift([0,0,0,0,0,0,0,0,0,0])
+
         }
     }
+    scoreboard.innerHTML = "Score: " + String(score)
 }
+
+document.addEventListener("keydown", (e) => {
+    e.preventDefault()
+    switch(e.key) {
+        case "w":
+            model.rotate()
+            break;
+
+        case "a":
+            model.move(false)
+            break;
+        case "s":
+            model.moveDown()
+            break;
+        case "d":
+            model.move(true)
+            break;
+    }
+})

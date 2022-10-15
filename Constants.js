@@ -1,10 +1,11 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+const gameClock = 2000
 const cols = 10;
 const row = 20;
 const block_size = 30;
-const score_worth = 10
+const score_worth = 10  
 
 const shapes = [
     [],
