@@ -1,9 +1,9 @@
-let canvas = document.getElementById("canvas")
+/*let canvas = document.getElementById("canvas")
 let scoreboard = document.getElementById("score")
-let ctx = canvas.getContext("2d")
+let ctx = canvas.getContext("2d")*/
 
 ctx.scale(block_size, block_size)
-let model = new GameModel(ctx)
+let model = new GameMap(ctx)
 
 let score = 0
 
@@ -16,11 +16,11 @@ let newGameState = () => {
     
     if(model.fallingPiece === null) {
         const rand = Math.round(Math.random() * 6) + 1
-        const newPiece = new Piece(shapes[rand], ctx)
+        const newPiece = new SpawnPiece(shapes[rand], ctx)
         model.fallingPiece = newPiece
-        model.moveDown()
+        model.gravity()
     } else {
-        model.moveDown()
+        model.gravity()
     }
 }
 
@@ -42,7 +42,7 @@ const fullSend = () => {
 
         }
     }
-    scoreboard.innerHTML = "Score: " + String(score)
+    //scoreboard.innerHTML = "Score: " + String(score)
 }
 
 document.addEventListener("keydown", (e) => {
@@ -51,7 +51,6 @@ document.addEventListener("keydown", (e) => {
         case "w":
             model.rotate()
             break;
-
         case "a":
             model.move(false)
             break;

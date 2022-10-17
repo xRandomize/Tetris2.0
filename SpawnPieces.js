@@ -1,5 +1,5 @@
 class SpawnPiece {
-    constructor(shapes,ctx) {
+    constructor(shapes, ctx) {
         this.shapes = shapes
         this.ctx = ctx
         this.y = 0

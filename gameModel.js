@@ -11,25 +11,31 @@ class GameMap {
         for (var i = 0; i < row; i++) {
             grid.push([])
             for (var j = 0; j < cols; j++) {
-                grid(grid.length - 1).push(0)
+                grid[grid.length - 1].push(0)
             }
         }
         return grid
     }
 
-    //Game laws of physics
-    gameState() {
-        for (let i = 0; i < this.grid.length; i++) {
-            for (let j = 0; j < this.grid.length; j++) {
-                let cell = this.grid[i][j]
-                this.ctx.fillStyle = colors[cell]
-                this.ctx.fillRect(j, i, 1, 1)
+    collision(x, y, candidate = null) {
+        const shapes = candidate || this.fallingPiece.shape
+        const n = shapes.length
+        for (let i = 0; i < n; i++) {
+            for ( let j = 0; j < n; j++) {
+                if (shapes[i][j] > 0) {
+                    let p = x + j
+                    let q = y + i
+                    if (p >= 0 && p < cols && q < row) {
+                        if (this.gird[q][p] > 0) {
+                            return true
+                        }
+                    } else {
+                        return true
+                    }
+                }
             }
         }
-
-        if (this.fallingPiece !== null) {
-            this.fallingPiece.renderPiece()
-        }
+        return false;
     }
 
     gravity() {
@@ -63,25 +69,19 @@ class GameMap {
         this.gameState()
     }
 
-    collision(x, y, candidate = null) {
-        const shape = candidate || this.fallingPiece.shape
-        const n = shape.length
-        for (let i = 0; i < n; i++) {
-            for ( let j = 0; j < n; j++) {
-                if (shape[i][j] > 0) {
-                    let p = x + j
-                    let q = y + i
-                    if (p >= 0 && p < cols && q < row) {
-                        if (this.gird[q][p] > 0) {
-                            return true
-                        }
-                    } else {
-                        return true
-                    }
-                }
+    //Game laws of physics
+    gameState() {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid.length; j++) {
+                let cell = this.grid[i][j]
+                this.ctx.fillStyle = colors[cell]
+                this.ctx.fillRect(j, i, 1, 1)
             }
         }
-        return false;
+
+        if (this.fallingPiece !== null) {
+            this.fallingPiece.renderPiece()
+        }
     }
 
     moveDown() {

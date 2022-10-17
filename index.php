@@ -19,7 +19,7 @@
 
     <script src="Constants.js"></script>
     <script src="SpawnPieces.js"></script>
-    <script src="gameStart.js"></script>
     <script src="gameModel.js"></script>
+    <script src="gameStart.js"></script>
 </body>
 </html>
