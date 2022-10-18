@@ -1,6 +1,6 @@
-/*let canvas = document.getElementById("canvas")
+//let canvas = document.getElementById("canvas")
 let scoreboard = document.getElementById("score")
-let ctx = canvas.getContext("2d")*/
+//let ctx = canvas.getContext("2d")
 
 ctx.scale(block_size, block_size)
 let model = new GameMap(ctx)
@@ -46,19 +46,23 @@ const fullSend = () => {
 }
 
 document.addEventListener("keydown", (e) => {
-    e.preventDefault()
+    
     switch(e.key) {
         case "w":
-            model.rotate()
+            model.rotate();
+            e.preventDefault();
             break;
         case "a":
-            model.move(false)
+            model.move(false);
+            e.preventDefault();
             break;
         case "s":
-            model.moveDown()
+            model.moveDown();
+            e.preventDefault();
             break;
         case "d":
-            model.move(true)
+            model.move(true);
+            e.preventDefault();
             break;
     }
 })
