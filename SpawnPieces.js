@@ -6,6 +6,7 @@ class SpawnPiece {
         this.x = Math.floor(cols / 2);
     }
 
+    //Function to draw on the map
     renderPiece() {
         this.shapes.map((row, i) => {
             row.map((cell, j) => {

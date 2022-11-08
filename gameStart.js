@@ -44,10 +44,10 @@ const fullSend = () => {
         }
     }
 
-    scoreboard.innerHTML = "SCORE   : " + String(score);
+    scoreboard.innerHTML = "SCORE: " + String(score);
 }
-
-//Controls for the game
+    
+//Controls for the game     
 document.addEventListener("keydown", (e) => {
     
     switch(e.key) {

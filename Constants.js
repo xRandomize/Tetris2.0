@@ -52,6 +52,7 @@ const shapes = [
 
 //Options of colors the script can decide from
 const colors = [
+    "#000000", //black
     "#4a72f5", //blue
     "#239909", //Green
     "#6807d2", //Purple
@@ -59,4 +60,8 @@ const colors = [
     "#a5a605", //Yellow
     "#40e0d0", //Turqoise
     "#cb6a08" //Orange
+]
+
+const black = [
+    "#000000"
 ]

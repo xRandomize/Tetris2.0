@@ -16,7 +16,8 @@ class GameMap {
         for (var i = 0; i < row; i++) {
             grid.push([])
             for (var j = 0; j < cols; j++) {
-                grid[grid.length - 1].push(0);
+                grid.push([]);
+                this.ctx.fillStyle = black;
             }
         }
         return grid;
@@ -68,15 +69,25 @@ class GameMap {
             this.gameState();
             return;
         } else if (this.collision(this.fallingPiece.x, this.fallingPiece.y + 1)) {
+           // console.log("!Hit bottom");
             const shape = this.fallingPiece.shapes;
             const x = this.fallingPiece.x; 
             const y = this.fallingPiece.y;
+           // console.log("!!Hit bottom");
             shape.map((row, i) => {
+                //console.log("!!!!Hit bottom");
                 row.map((cell, j) => {
-                    let p = x + j;
-                    let q = y + i;
-                    if (p >= 0 && p < cols && q < row && cell > 0) {
+                    //console.log("!!!!!Hit bottom");
+                    let p = x + j; // X
+                    let q = y + i; // Y
+
+                    //this.grid[q][p] = shape[i][j];
+                    console.log(!(q < row+1), cell > 0, p > 0, p < cell);
+
+                    if (!(q < row+1) && cell > 0 && p > 0) {
                         this.grid[q][p] = shape[i][j];
+                        this.fallingPiece.state = true;
+                        console.log("Hit bottom");
                     }
                 })
             })
@@ -94,7 +105,7 @@ class GameMap {
     }
 
     //Move Function
-    /*Move function does what it says. It moves the pieces to the right when triggered */
+    /*Move function does what it says. It moves the pieces to the right when triggered*/
     move(right) {
         if (this.fallingPiece === null) {
             return;
