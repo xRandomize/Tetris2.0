@@ -1,11 +1,16 @@
 //Setting up game map
 class GameMap {
+    //Constructor to create and intialize objects within the class
     constructor(ctx) {
         this.ctx = ctx
         this.fallingPiece = null
         this.grid = this.makeStartGrid()
     }
 
+    //Creates a 2D array
+    /*The 2D array is created by 2 for loops creating empty array in both y and x axis and stop whenever it hits
+    the designated const in this case it's row and cols. It creats a grid and pushes it until the loop stops meanwhile
+    the sames happens for the y axis | Grid.length -1 prevents the cols from becoming 11 cols*/
     makeStartGrid() {
         let grid = []
         for (var i = 0; i < row; i++) {
@@ -17,6 +22,9 @@ class GameMap {
         return grid;
     }
 
+    //Collision Detection
+    /*The collision detection looks at the shape and only allows it to move if there is a grid or if the 
+    grid number is higher than 0*/
     collision(x, y, candidate = null) {
         const shape = candidate || this.fallingPiece.shapes
         const n = shape.length
@@ -38,40 +46,10 @@ class GameMap {
         return false;
     }
 
-    gravity() {
-        if (this.fallingPiece === null) {
-            this.gameState();
-            return;
-
-        } else if (this.collision(this.fallingPiece.x, this.fallingPiece.y + 1)) {
-            const shapes = this.fallingPiece.shapes;
-            const x = this.fallingPiece.x;
-            const y = this.fallingPiece.y;
-
-            shapes.map((row, i) => {
-                row.map((cell, j) => {
-                    let p = x + j;
-                    let q = y + i;
-                    if (p >= 0 && p < cols && q > row && cell > 0) {
-                        this.grid[q][p] = shapes[i][j];
-                    }
-                })
-            })
-
-            if (this.fallingPiece.y === 0) {
-                alert("Game over");
-                this.grid = this.makeStartGrid();
-            }
-            this.fallingPiece = null;
-        } else {
-            this.fallingPiece.y += 1;
-        }
-        this.gameState();
-    }
-
+    //GameState is a function that draws the pieces on the board and intiates other pieces
     gameState() {
         for (let i = 0; i < this.grid.length; i++) {
-            for (let j = 0; j < this.grid.length; j++) {
+            for (let j = 0; j < this.grid[i].length; j++) {
                 let cell = this.grid[i][j];
                 this.ctx.fillStyle = colors[cell];
                 this.ctx.fillRect(j, i, 1, 1);
@@ -83,10 +61,12 @@ class GameMap {
         }
     }
 
-    moveDown() {
+    //Gravity function
+    /*Gravity function moves the piece down and also checks if game over by seeing it goes over the Y axis */
+    gravity() {
         if (this.fallingPiece === null) {
             this.gameState();
-            return
+            return;
         } else if (this.collision(this.fallingPiece.x, this.fallingPiece.y + 1)) {
             const shape = this.fallingPiece.shapes;
             const x = this.fallingPiece.x; 
@@ -104,7 +84,7 @@ class GameMap {
             // check game over 
             if (this.fallingPiece.y === 0) {
                 alert("Game over!");
-                this.grid = this.makeStartingGrid();
+                this.grid = this.makeStartGrid();
             }
             this.fallingPiece = null;
         } else {
@@ -113,6 +93,8 @@ class GameMap {
         this.gameState()
     }
 
+    //Move Function
+    /*Move function does what it says. It moves the pieces to the right when triggered */
     move(right) {
         if (this.fallingPiece === null) {
             return;
@@ -131,9 +113,11 @@ class GameMap {
                 this.fallingPiece.x -= 1;
             }
         }
-        this.gameState()
+        this.gameState();
     }
 
+    //Rotate function
+    /*Does what the name says. It rotates the pieces by redrawing the shape by moving the grid numbers*/
     rotate() {
         if (this.fallingPiece !== null) {
             let shape = [...this.fallingPiece.shapes.map((row) => [...row])];

@@ -1,50 +1,53 @@
-//let canvas = document.getElementById("canvas")
-let scoreboard = document.getElementById("score")
-//let ctx = canvas.getContext("2d")
+//Let you use canvas
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+let scoreboard = document.getElementById("score");
 
-ctx.scale(block_size, block_size)
-let model = new GameMap(ctx)
+ctx.scale(block_size, block_size);
+let model = new GameMap(ctx);
 
-let score = 0
+let score = 0;
 
 setInterval(() => {
-    newGameState()
+    newGameState();
 }, gameClock);
 
 let newGameState = () => {
-    fullSend()
+    fullSend();
     
     if(model.fallingPiece === null) {
-        const rand = Math.round(Math.random() * 6) + 1
-        const newPiece = new SpawnPiece(shapes[rand], ctx)
-        model.fallingPiece = newPiece
-        model.gravity()
+        const rand = Math.round(Math.random() * 6) + 1;
+        const newPiece = new SpawnPiece(shapes[rand], ctx);
+        model.fallingPiece = newPiece;
+        model.gravity();
     } else {
-        model.gravity()
+        model.gravity();
     }
 }
 
 const fullSend = () => {
-    const aliFilled = (row) => {
+    const allFilled = (row) => {
         for (let x of row) {
             if (x === 0) {
-                return false
+                return false;
             }
         }
-        return true
+        return true;
     }
 
     for (let i = 0; i < model.grid.length; i++) {
-        if (aliFilled(model.grid[i])) {
-            score += score_worth
-            model.grid.splice(i, l)
-            model.grid.unshift([0,0,0,0,0,0,0,0,0,0])
+        if (allFilled(model.grid[i])) {
+            score += score_worth;
+            model.grid.splice(i, 1);
+            model.grid.unshift([0,0,0,0,0,0,0,0,0,0]);
 
         }
     }
-    //scoreboard.innerHTML = "Score: " + String(score)
+
+    scoreboard.innerHTML = "SCORE   : " + String(score);
 }
 
+//Controls for the game
 document.addEventListener("keydown", (e) => {
     
     switch(e.key) {
@@ -57,7 +60,7 @@ document.addEventListener("keydown", (e) => {
             e.preventDefault();
             break;
         case "s":
-            model.moveDown();
+            model.gravity();
             e.preventDefault();
             break;
         case "d":
@@ -66,3 +69,4 @@ document.addEventListener("keydown", (e) => {
             break;
     }
 })
+

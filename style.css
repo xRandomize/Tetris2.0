@@ -1,11 +1,14 @@
+/*Forces all h1 tagged text to be in 'Press Start 2P' in cursive*/
 h1 {
     font-family: 'Press Start 2P', cursive;
 }
 
+/*Shows the border of canvas with 2px line completely black with solid so no special effects*/
 #canvas {
     border: 2px solid #000;
 }
 
-.System {
+/*Lines up the system stats correctly*/
+.stats {
     display:inline-block
 }

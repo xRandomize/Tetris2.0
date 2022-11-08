@@ -1,15 +1,15 @@
-const canvas = document.getElementById("canvas");
-
+//The Canvas size
 canvas.width =  300;
 canvas.height =  600;
-const ctx = canvas.getContext("2d");
 
-const gameClock = 200
-const cols = 10;
-const row = 20;
-const block_size = 30;
-const score_worth = 10  
+//Const
+const gameClock = 400 //The speed of the game
+const cols = 10; //How many cols are in the map
+const row = 20; //How many rows are in the map
+const block_size = 30; //How big the sizes of the blocks are
+const score_worth = 10 //How much a full line is worth in terms of score
 
+//All of the shapes of the pieces
 const shapes = [
     [],
     [
@@ -50,6 +50,7 @@ const shapes = [
     ]
 ]
 
+//Options of colors the script can decide from
 const colors = [
     "#4a72f5", //blue
     "#239909", //Green
